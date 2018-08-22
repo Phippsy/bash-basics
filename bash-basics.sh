@@ -99,3 +99,42 @@ exec 3>&1 >log; echo 'Hello!'; exec 1>&3 3>&-
 # Variables and expansion
 
 # Using expansion, bash will match against the patterns we provide, a la regex. 
+
+# Extended globs
+# Provide more advanced patterns. We can install them as follows:
+shopt -s extglob
+
+
+# Extended Glob	Meaning
+# +(pattern[ | pattern ... ])	Matches when any of the patterns in the list appears, once or many times over. Reads: at least one of ....
+# *(pattern[ | pattern ... ])	Matches when any of the patterns in the list appears, once, not at all, or many times over. Reads: however many of ....
+# ?(pattern[ | pattern ... ])	Matches when any of the patterns in the list appears, once or not at all. Reads: maybe one of ....
+# @(pattern[ | pattern ... ])	Matches when any of the patterns in the list appears just once. Reads: one of ....
+# !(pattern[ | pattern ... ])	Matches only when none of the patterns in the list appear. Reads: none of ....
+
+# Tilde expansion
+# Resolves to the home directory - you can access the home directory of any user by putting their username after the tilde, as follows:
+echo 'My boss lives in ' ~root
+
+# Command Substitution
+# Is the process of expanding data into command arguments.
+echo "The contents of the example.txt file are $(cat example.txt)"
+# Value expansion means we can start a subshell - which bash starts on the code between brackets. Bash will wait for this subshell to execute and then feed the results into the echo command.
+
+# Bash parameters
+# Allow us to access stored information. 
+
+# Shell variables
+shellvar=hello # Never spaces around the =
+echo $shellvar
+# You can optionally add {} to specify where the parameter name begins and ends
+echo ${shellvar}
+
+# Parameter expansion operators
+# Additional modifiers which allow us to modify the output of the expansion.
+# https://guide.bash.academy/expansions/?=Parameter_Expansion#p2.2.2_5
+
+# Arrays
+myarray=( one two 'and a third' )
+echo ${myarray[@]}
+
